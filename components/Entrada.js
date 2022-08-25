@@ -4,9 +4,9 @@ import Image from "next/image";
 import styles from "../styles/Entrada.module.css";
 
 const Entrada = ({ entrada }) => {
-	const { contenido, description, titulo, publishedAt } = entrada.attributes;
+	const { contenido, description, titulo, publishedAt, url } =
+		entrada.attributes;
 	let urlImagen = entrada.attributes.imagen.data.attributes.url;
-	const { id } = entrada;
 	return (
 		<article>
 			{urlImagen ? (
@@ -21,7 +21,7 @@ const Entrada = ({ entrada }) => {
 				<h3>{titulo}</h3>
 				<p className={styles.fecha}>{formatearFecha(publishedAt)}</p>
 				<p className={styles.resumen}>{description}</p>
-				<Link href={`/blog/${id}`}>
+				<Link href={`/blog/${url}`}>
 					<a className={styles.enlace}>Leer Entrada</a>
 				</Link>
 			</div>

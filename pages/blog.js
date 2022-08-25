@@ -18,7 +18,7 @@ const Blog = ({ entradas }) => {
 };
 
 export async function getServerSideProps() {
-	const url = "http://localhost:1337/api/blogs/?populate=*";
+	const url = `${process.env.API_URL}/api/blogs/?populate=*`;
 	const respuesta = await fetch(url);
 	const entradas = await respuesta.json();
 	return {
