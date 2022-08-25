@@ -3,7 +3,6 @@ import Layout from "../components/Layout";
 import Listado from "../components/Listado";
 
 const Tienda = ({ guitarras }) => {
-	console.log(guitarras);
 	return (
 		<div>
 			<Layout pagina="Tienda virtual">

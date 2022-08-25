@@ -54,7 +54,7 @@ export async function getStaticProps({ params: { url } }) {
 }
 
 /* export async function getServerSideProps({ query: { id } }) {
-	const url = `${process.env.API.URL}/api/blogs/${id}/?populate=*`;
+	const url = `${process.env.API_URL}/api/blogs/${id}/?populate=*`;
 	const respuesta = await fetch(url);
 	const entradas = await respuesta.json();
 
