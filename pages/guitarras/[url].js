@@ -2,10 +2,28 @@ import React from "react";
 import styles from "../../styles/Guitarra.module.css";
 import Image from "next/image";
 import Layout from "../../components/Layout";
+import { useState } from "react";
 
-const Producto = ({ guitarra }) => {
-	const { description, nombre, precio, imagen } = guitarra.data[0].attributes;
+const Producto = ({ guitarra, agregarCarrito }) => {
+	const { description, nombre, precio, imagen, id } =
+		guitarra.data[0].attributes;
 	const urlImagen = imagen.data.attributes.url;
+	const [cantidad, setCantidad] = useState(1);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (cantidad < 1) {
+			alert("Cantidad no válida");
+			return;
+		}
+		const guitarraSeleccionada = {
+			id: guitarra.data[0].id,
+			imagen: urlImagen,
+			nombre,
+			precio,
+			cantidad,
+		};
+		agregarCarrito(guitarraSeleccionada);
+	};
 	return (
 		<Layout pagina={`Guitarra ${nombre}`}>
 			<div className={styles.guitarra}>
@@ -20,9 +38,14 @@ const Producto = ({ guitarra }) => {
 					<h3>{nombre}</h3>
 					<p className={styles.descripcion}>{description}</p>
 					<p className={styles.precio}>${precio}</p>
-					<form className={styles.formulario}>
+					<form onSubmit={handleSubmit} className={styles.formulario}>
 						<label>Cantidad:</label>
-						<select>
+						<select
+							value={cantidad}
+							onChange={(e) =>
+								setCantidad(parseInt(e.target.value))
+							}
+						>
 							<option value="">-- Seleccione --</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
